@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!doctype html>
 <html lang="en">
@@ -13,17 +13,18 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/carousel/">
 
-    <!-- Bootstrap core CSS -->
-    <!-- resources라는 로컬파일을 접근하려면 url "/resources/"를 넣어줘야 맵핑이 됨. -->
-    <!-- 클라이언트가 아래의 url을 사용해서 서버에 요청하면 서버가 가져온다  -->
-	<link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!-- Bootstrap core CSS -->
+<!-- resources라는 로컬파일을 접근하려면 url "/resources/"를 넣어줘야 맵핑이 됨. -->
+<!-- 클라이언트가 아래의 url을 사용해서 서버에 요청하면 서버가 가져온다  -->
+<link href="<c:url value="/resources/css/bootstrap.min.css"/>"
+	rel="stylesheet"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
 
-    <!-- Favicons -->
-    <!-- resources라는 로컬파일을 접근하려면 url "/resources/"를 넣어줘야 맵핑이 됨. -->
-    <!-- 클라이언트가 아래의 url을 사용해서 서버에 요청하면 서버가 가져온다  -->
-	<link rel="icon" href="<c:url value="/resources/favicon.ico"/>">
-
-
+<!-- Favicons -->
+<!-- resources라는 로컬파일을 접근하려면 url "/resources/"를 넣어줘야 맵핑이 됨. -->
+<!-- 클라이언트가 아래의 url을 사용해서 서버에 요청하면 서버가 가져온다  -->
+<link rel="icon" href="<c:url value="/resources/favicon.ico"/>">
 
     <style>
       .bd-placeholder-img {
@@ -42,9 +43,7 @@
       }
     </style>
     <!-- Custom styles for this template -->
-    <!-- resources라는 로컬파일을 접근하려면 url "/resources/"를 넣어줘야 맵핑이 됨. -->
-    <!-- 클라이언트가 아래의 url을 사용해서 서버에 요청하면 서버가 가져온다  -->
-    <link href="<c:url value="/resources/css\carousel.css"/>" rel="stylesheet">
+    <link href="carousel.css" rel="stylesheet">
   </head>
   <body>
     <header>
@@ -56,10 +55,10 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="<c:url value="/"/>">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="<c:url value="/products"/>">Products</a>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
@@ -83,7 +82,7 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
+        <svg class="bd-placeholder-img" width="100%" height="500px" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
         <div class="container">
           <div class="carousel-caption text-left">
             <h1>Example headline.</h1>
@@ -93,7 +92,7 @@
         </div>
       </div>
       <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
+        <svg class="bd-placeholder-img" width="100%" height="500px" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
         <div class="container">
           <div class="carousel-caption">
             <h1>Another example headline.</h1>
@@ -103,7 +102,7 @@
         </div>
       </div>
       <div class="carousel-item">
-        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
+        <svg class="bd-placeholder-img" width="100%" height="500px" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
         <div class="container">
           <div class="carousel-caption text-right">
             <h1>One more for good measure.</h1>
@@ -158,13 +157,10 @@
   <!-- FOOTER -->
   <footer class="container">
     <p class="float-right"><a href="#">Back to top</a></p>
-    <p>&copy; 2017-2019 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+    <p>&copy; 2020 Hansung Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
   </footer>
 </main>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<!-- resources라는 로컬파일을 접근하려면 url "/resources/"를 넣어줘야 맵핑이 됨. -->
-<!-- 클라이언트가 아래의 url을 사용해서 서버에 요청하면 서버가 가져온다  -->
-<script src=""<c:url value="/resources/js/bootstrap.bundle.min.js"/>" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
-</body>
+      <script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.4/dist/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script></body>
 </html>
 
