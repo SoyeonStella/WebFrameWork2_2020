@@ -8,14 +8,17 @@
 
 <div class="container-wrapper">
 	<div class="container">
-		<h1>Add Product</h1>
+		<h1>Update Product</h1>
 		<p class="lead">Fill the below information to add a product:</p>
 		
 		<!-- action : 만약 하단의 submit이 눌렸을 때 수행될 url이 넣어져 있음, method로는 post로 보내게 되어있음 -->
 		<!-- modelAttribute(여기에서는 product)의 내용을 가져와 form에 채워 넣어 준다. 
 		사용자가 작성 중 무언가를 잘못입력했을때 입력해두었던 내용들이 날아가면 안되기 때문.   -->
-		<sf:form action="${pageContext.request.contextPath}/admin/productInventory/addProduct"
+		<sf:form action="${pageContext.request.contextPath}/admin/productInventory/updateProduct"
 			method="post" modelAttribute="product">
+			
+			<!-- web form에 보이지는 않게 id 값 전달 -->
+			<sf:hidden path="id"/>
 			
 			<!-- 아래에서 sf: path 부분은 모두 product(modelAttribute)의 name, category...이다.
 				prodcut의 name,categroy..들을 가져와서 기본적으로 내용을 채워준다.  -->

@@ -25,32 +25,33 @@ import kr.ac.hansung.cse.model.Product;
 // 또한 JDBC Template에 DataSource를 주입해주는 부분도 필요하다. 
 @Repository
 public class ProductDao {
-	
-		// JDBC Template을 활용함
-		private JdbcTemplate jdbcTemplate;
 
-		@Autowired
-		// dataSource가 싱글톤이므로 자료형으로 알아서 찾아서 주입해준다.
-		// setter method. 이 메서드 호출시 DataSource를 의존성 주입을 통해서 주입해 준다.
-		public void setDataSource(DataSource dataSource) {
+	// JDBC Template을 활용함
+	private JdbcTemplate jdbcTemplate;
 
-			// DataSource를 활용해 jdbcTemplate 인스턴스 생성
-			jdbcTemplate = new JdbcTemplate(dataSource);
-		}
+	@Autowired
+	// dataSource가 싱글톤이므로 자료형으로 알아서 찾아서 주입해준다.
+	// setter method. 이 메서드 호출시 DataSource를 의존성 주입을 통해서 주입해 준다.
+	public void setDataSource(DataSource dataSource) {
 
+		// DataSource를 활용해 jdbcTemplate 인스턴스 생성
+		jdbcTemplate = new JdbcTemplate(dataSource);
+	}
 
+	// DB에서 제품 리스트를 가져와주는 메서드
 	public List<Product> getProducts() {
 		String sqlStatement = "select * from product";
-		
-		// sqlStatement 인자로 database를 조회하게 되면 
-		// 레코드를 객체로 맵핑해 주어야한다 -> 익명클래스 인자인 RowMapper의 mapRow 메서드에 개발자가 정의해줘야함     
-		return jdbcTemplate.query(sqlStatement, new RowMapper<Product> () { // 익명클래스 
+
+		// sqlStatement 인자로 database를 조회하게 되면
+		// 레코드를 객체로 맵핑해 주어야한다 -> 익명클래스 인자인 RowMapper의 mapRow 메서드에 개발자가 정의해줘야함
+		// 여러게의 레코드를 객체로 가져올 것이므로 query 메서드 사용 
+		return jdbcTemplate.query(sqlStatement, new RowMapper<Product>() { // 익명클래스
 
 			@Override
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
-				
+
 				Product product = new Product();
-				
+
 				product.setId(rs.getInt("id"));
 				product.setName(rs.getString("name"));
 				product.setCategory(rs.getString("category"));
@@ -60,14 +61,14 @@ public class ProductDao {
 				product.setDescription(rs.getString("description"));
 
 				return product;
-			} 
-			
+			}
+
 		});
 	}
 
-
+	// DB에 제품을 추가해주는 메서드 
 	public Boolean addProduct(Product product) {
-		
+
 		int id = product.getId();
 		String name = product.getName();
 		String category = product.getCategory();
@@ -75,11 +76,66 @@ public class ProductDao {
 		String manufacturer = product.getManufacturer();
 		int unitInStock = product.getUnitInStock();
 		String description = product.getDescription();
-	    
-		String sqlStatment = "insert into product (id, name, category, price, manufacturer, unitInStock, description) "
+
+		String sqlStatement = "insert into product (id, name, category, price, manufacturer, unitInStock, description) "
 				+ "values (?, ?, ?, ?, ?, ?, ?)";
-		
-		return (jdbcTemplate.update(sqlStatment,
+
+		return (jdbcTemplate.update(sqlStatement,
 				new Object[] { id, name, category, price, manufacturer, unitInStock, description }) == 1);
+	}
+
+	// 특정 id에 해당하는 제품을 DB에서 삭제하는 메서드
+	public boolean deleteProduct(int id) {
+
+		String sqlStatement = "delete from product where id=?";
+
+		return (jdbcTemplate.update(sqlStatement, new Object[] { id }) == 1);
+	}
+
+	// DB에서 특정 id에 해당하는 제품을 가져다주는 메서드
+	public Product getProductById(int id) {
+		String sqlStatement = "select * from product where id=?";
+		
+		// sqlStatement 인자로 database를 조회하게 되면
+		// 레코드를 객체로 맵핑해 주어야한다 -> 익명클래스 인자인 RowMapper의 mapRow 메서드에 개발자가 정의해줘야함
+		// 여기서는 하나의 객체만 가져오므로 query가 아닌 queryForObject 메서드를 사용해야 함 
+		// new Object[] {id}에는 sql문에서 placeholder로 받아온 id를 넣어준다. 
+		return jdbcTemplate.queryForObject(sqlStatement, new Object[] {id}, new RowMapper<Product>() { // 익명클래스
+
+			@Override
+			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+				Product product = new Product();
+
+				product.setId(rs.getInt("id"));
+				product.setName(rs.getString("name"));
+				product.setCategory(rs.getString("category"));
+				product.setPrice(rs.getInt("price"));
+				product.setManufacturer(rs.getString("manufacturer"));
+				product.setUnitInStock(rs.getInt("unitInStock"));
+				product.setDescription(rs.getString("description"));
+
+				return product;
+			}
+
+		});
+
+	}
+
+	// DB에 제품 내용 수정 사항을 반영해주는 메서드
+	public boolean updateProduct(Product product) {
+		int id = product.getId();
+		String name = product.getName();
+		String category = product.getCategory();
+		int price = product.getPrice();
+		String manufacturer = product.getManufacturer();
+		int unitInStock = product.getUnitInStock();
+		String description = product.getDescription();
+
+		String sqlStatement = "update product set name=?, category=?, price=?, manufacturer=?, unitInStock=?, description=? "
+				+ "where id=? ";
+
+		return (jdbcTemplate.update(sqlStatement,
+				new Object[] { name, category, price, manufacturer, unitInStock, description, id }) == 1);
 	}
 }

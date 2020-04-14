@@ -44,4 +44,10 @@
     <put-attribute name="body" value="/WEB-INF/views/addProduct.jsp" />
   </definition>
   
+  <!-- base definition을 상속받는 updateProduct difinition. -->
+  <definition name="updateProduct" extends="base">
+    <put-attribute name="title" value="Update Product Page" />
+    <put-attribute name="body" value="/WEB-INF/views/updateProduct.jsp" />
+  </definition>
+  
 </tiles-definitions>

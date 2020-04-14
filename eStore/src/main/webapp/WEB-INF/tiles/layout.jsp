@@ -28,6 +28,8 @@
 <!-- 클라이언트가 아래의 url을 사용해서 서버에 요청하면 서버가 가져온다  -->
 <link rel="icon" href="<c:url value="/resources/favicon.ico"/>">
 
+<link href="<c:url value="/resources/fontAwesome/css/all.css"/>" rel="stylesheet"> <!--load all styles -->
+
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
