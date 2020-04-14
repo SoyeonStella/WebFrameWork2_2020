@@ -18,7 +18,9 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
 		
-		//루트로 리퀘스트가 들어오면 home.jsp로 넘어간다. 
+		// 예전에는 루트로 리퀘스트가 들어오면 home.jsp로 넘어간다. 
+		// 이젠 tiles를 사용하기때문에 home이라는 definition으로 넘어간다.
+		// " " 안의 이름은 이제 definition 이름이다. 
 		return "home";
 	}
 	

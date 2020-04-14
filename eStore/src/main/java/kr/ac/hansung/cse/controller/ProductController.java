@@ -16,7 +16,7 @@ public class ProductController { // controller가 service 호출, service가 dao
 	@Autowired
 	private ProductService productService;
 	
-	// " " 안의 경로로 리퀘스트가 들어오면 해당 함수(getProducts)가 실행되
+	// " " 안의 경로로 리퀘스트가 들어오면 해당 함수(getProducts)가 실행되고 
 	@RequestMapping("/products")
 	public String getProducts(Model model) {
 		
@@ -24,7 +24,8 @@ public class ProductController { // controller가 service 호출, service가 dao
 		List<Product> products = productService.getProducts();
 		model.addAttribute("products", products);
 		
-		// " " 안은 view의 logical name로써 products.jsp로 넘어간다. 
+		// " " 안은 view의 logical name로써 예전에는 /products 로 리퀘스트가 들어오면 products.jsp로 넘어간다.
+		// 이젠 tiles를 사용하기때문에 products라는 definition으로 넘어간다.
 		return "products";
 	
 	}

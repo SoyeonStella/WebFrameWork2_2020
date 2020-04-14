@@ -12,11 +12,16 @@ import kr.ac.hansung.cse.model.Product;
 public class ProductService {
 
 	@Autowired
-	private ProductDao productDao; // ProductService는 Dao 의존성 주입하여 받는다.
+	private ProductDao productDao; // ProductService는 Autowired로 Dao 의존성 주입하여 받는다.
 	
 	public List<Product> getProducts() {
 		// dao를 활용해서 getProducts()를 호출한다. 
 		return productDao.getProducts();
+	}
+
+	public Boolean addProduct(Product product) {
+		
+		return productDao.addProduct(product);
 	}
 	
 }
